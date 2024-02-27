@@ -1,0 +1,16 @@
+footer {
+    text-align: center;
+    color: white;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+}
+
+footer nav {
+    margin-bottom: 10px;
+}
+
+footer nav a {
+    margin: 0px 10px 0px;
+}

@@ -1,0 +1,14 @@
+.producto {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 15px;
+}
+.imagen{
+    height: 600px;
+    background-image: url("https://static.wixstatic.com/media/441fa4_6f99857cd36f46f9aa4830122338d1d8~mv2.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+}

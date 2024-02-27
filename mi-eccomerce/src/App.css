@@ -1,0 +1,13 @@
+body{
+  background-color: rgb(109, 21, 153);
+}
+
+a:hover{
+  cursor: pointer;
+}
+
+.navbar{
+  display: flex;
+  gap: 5px;
+}
+

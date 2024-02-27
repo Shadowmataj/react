@@ -1,0 +1,877 @@
+/* Fuente de la pagina */
+@font-face {
+    font-family: "oswald";
+    src: url("../fonts/Oswald/Oswald-VariableFont_wght.ttf");
+}
+
+.cart-icon:hover{
+    cursor: pointer;
+}
+
+.contacto-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-width: 0px;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+}
+a:visited{
+    color: white;
+    text-decoration: none;
+}
+
+/* Parametros de las secciones de contactos */
+.contacto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(75, 82, 88, 0.695);
+    text-align: center;
+    font-size: x-large;
+    min-width: 0px;
+}
+
+#contacto-form {
+    background-color: rgb(75, 82, 88);
+    overflow: hidden;
+}
+
+.form-datos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Parametros de la seccion de datos */
+.datos {
+    border-style: solid;
+    margin: 3px;
+    background-color: white;
+    border-radius: 15px;
+    font-family: "oswald";
+    text-align: center;
+    color: black;
+}
+
+.producto {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 15px;
+}
+
+.loading-screen{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    color: white; 
+    height: 15vh;
+}
+
+/* Caracteristicas de los botones de la seccion de contacto */
+.boton_form {
+    border-radius: 10px;
+    width: 50%;
+    font-family: "Oswald";
+}
+
+.botones-form {
+    display: flex;
+    flex-direction: row;
+}
+
+* {
+    font-family: "oswald";
+}
+
+
+.container-fluid {
+    display: flex;
+    border-width: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.navbar-toggler {
+    border-width: 5px;
+}
+
+.navbar {
+    --bs-navbar-padding-x: none;
+}
+
+/* ancho de todas las secciones */
+.video-container {
+    width: 100%;
+    height: 800px;
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* Especificaciones del video principal */
+.video_principal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    /* background-size: cover; */
+    object-fit: cover;
+    z-index: -1;
+}
+
+.banner {
+    display: flex;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgb(189, 187, 187));
+    width: 100%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+
+/* Estructura independiente del banner para la pagina de principiantes */
+.banner_principiantes {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgb(189, 187, 187));
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    position: relative;
+    z-index: -1;
+}
+
+
+
+.articulos {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    flex-shrink: 1;
+    align-items: center;
+    justify-content: center;
+    width: 29%;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.articulos strong {
+    position: absolute;
+    top: 5px;
+}
+
+.articulos img {
+    max-width: 100%;
+    min-width: none;
+    max-height: 250px;
+    transform: scale(0.7);
+    padding-top: 10px;
+}
+
+.compras {
+    position: absolute;
+    bottom: 0px;
+    margin: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+/* Especificaciones de las lineas de separacion */
+hr {
+    height: 2px;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.martis-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Especificaciones generales de los contenedores para marcas y artistas */
+.contenedor_martis,
+.contenedor_martis_invertido {
+    display: flex;
+    margin: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 800px;
+    overflow: hidden;
+}
+
+.contenedor_martis_invertido {
+    align-items: flex-end;
+}
+
+.texto-martis {
+    color: white;
+}
+
+.texto-martis:hover {
+    animation: animacion-texto-martis 1s;
+    animation-fill-mode: forwards;
+}
+
+.texto-martis div,
+.texto-martis h2 {
+    max-width: 557px;
+    max-height: 521px;
+    text-align: center;
+}
+
+.texto-martis-invertido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+}
+
+.texto-martis-invertido:hover {
+    animation: animacion-texto-martis-invertido 2s;
+    animation-fill-mode: forwards;
+}
+
+.texto-martis-invertido div,
+.texto-martis-invertido h2 {
+    max-width: 557px;
+    max-height: 521px;
+    text-align: justify;
+}
+
+.texto-martis div::-webkit-scrollbar,
+.texto-martis-invertido div::-webkit-scrollbar {
+    width: 5px;
+}
+
+.texto-martis div::-webkit-scrollbar-thumb,
+.texto-martis-invertido div::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+}
+
+
+/* Especificaciones del contenedor principal de las opiniones */
+.contenedor_opiniones {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: dashed;
+    width: auto;
+    margin: 15px 30px 45px;
+    gap: 30px;
+}
+
+/* Caracteristicas de las opiniones */
+.opinion {
+    display: flex;
+    flex-direction: column;
+    flex: 2 1 20rem;
+    width: 500px;
+    text-align: center;
+}
+
+.opinion p {
+    margin: 0px 30px 15px;
+}
+
+/* Especificaciones del contenedor principal de la galeria */
+.contenedor_galeria {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgb(189, 187, 187), rgba(0, 0, 0, 0.8));
+    justify-content: center;
+    color: black;
+}
+
+.img-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin: 15px 30px 15px;
+    justify-content: center;
+    gap: 5px;
+}
+
+.videos-youtube {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 300px 300px;
+    width: 100%;
+    margin: 30px;
+    box-shadow: 0px 0px 30px red;
+}
+
+iframe {
+    border: 2px solid red;
+    width: 100%;
+    height: 100%;
+}
+
+/*********************************************************/
+/*********************************************************/
+/*************************Dark mode***********************/
+/*********************************************************/
+/*********************************************************/
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+    }
+
+    body footer {
+        background-color: rgb(71, 13, 100);
+    }
+
+    .articulos {
+        box-shadow: 0px 0px 5px rgb(71, 13, 100);
+        border-width: 0px;
+        background-color: black;
+    }
+
+    .articulos:hover {
+        box-shadow: 0px 0px 20px rgb(71, 13, 100);
+        animation: animacion-articulos-dark 1s;
+        animation-fill-mode: forwards;
+    }
+
+    .compras {
+        background-color: rgba(71, 13, 100, 0.3);
+    }
+
+    .buy-button {
+        background-color: rgb(71, 13, 100);
+        border-radius: 5px;
+        color: white;
+    }
+
+    .opinion {
+        box-shadow: 5px 5px 10px rgb(71, 13, 100);
+    }
+
+    .contenedor_martis,
+    .contenedor_martis_invertido {
+        box-shadow: 0px 0px 25px rgb(71, 13, 100);
+    }
+
+    .texto-martis div::-webkit-scrollbar-thumb,
+    .texto-martis-invertido div::-webkit-scrollbar-thumb {
+        background: rgb(71, 13, 100);
+    }
+
+    .contacto-container {
+        border: 2px solid rgb(71, 13, 100);
+        border: none;
+    }
+
+    hr {
+        background-color: rgb(71, 13, 100);
+        border-color: rgb(71, 13, 100);
+    }
+
+    .container-fluid {
+        background-color: rgb(71, 13, 100);
+    }
+
+    .boton_form {
+        background-color: rgb(71, 13, 100);
+    }
+
+    .datos {
+        border-color: rgb(71, 13, 100);
+        box-shadow: 0px 0px 5px rgb(71, 13, 100);
+    }
+
+    .datos:focus {
+        outline: none;
+        animation: animacion-datos-dark 1s;
+        animation-fill-mode: forwards;
+    }
+
+    .texto-martis div::-webkit-scrollbar-thumb:hover,
+    .texto-martis-invertido div::-webkit-scrollbar-thumb:hover {
+        background: rgb(31, 1, 48);
+    }
+}
+
+/*********************************************************/
+/*********************************************************/
+/*************************light mode**********************/
+/*********************************************************/
+/*********************************************************/
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: rgb(63, 84, 96);
+    }
+
+    body section button {
+        box-shadow: 0px 0px 5px rgb(32, 153, 190);
+        border-width: 0px;
+        background-color: rgb(63, 84, 96);
+    }
+
+    body section button:hover {
+        box-shadow: 0px 0px 20px rgb(32, 153, 190);
+    }
+
+    body footer {
+        background-color: rgb(32, 153, 190);
+    }
+
+    .articulos {
+        box-shadow: 0px 0px 5px rgb(32, 153, 190);
+        border-width: 0px;
+    }
+
+    .articulos:hover {
+        box-shadow: 0px 0px 20px rgb(32, 153, 190);
+        animation: animacion-articulos-light 1s;
+        animation-fill-mode: forwards;
+    }
+
+    .compras {
+        background-color: rgba(32, 153, 190, 0.3);
+    }
+
+    .buy-button {
+        background-color: rgb(32, 153, 190);
+        border-radius: 5px;
+        color: white;
+    }
+
+    .opinion {
+        box-shadow: 5px 5px 10px rgb(32, 153, 190);
+    }
+
+    .contenedor_martis,
+    .contenedor_martis_invertido {
+        box-shadow: 0px 0px 25px rgb(32, 153, 190);
+    }
+
+    .texto-martis div::-webkit-scrollbar-thumb,
+    .texto-martis-invertido div::-webkit-scrollbar-thumb {
+        background: rgb(32, 153, 190);
+    }
+
+    .contacto-container {
+        border: 2px solid rgb(32, 153, 190);
+    }
+
+    hr {
+        background-color: rgb(32, 153, 190);
+        border-color: rgb(32, 153, 190);
+    }
+
+    .container-fluid {
+        background-color: rgb(32, 153, 190);
+    }
+
+    .boton_form {
+        background-color: rgb(32, 153, 190);
+    }
+
+    .datos {
+        border-color: rgb(32, 153, 190);
+        box-shadow: 0px 0px 5px rgb(32, 153, 190);
+    }
+
+    .datos:focus {
+        outline: none;
+        border-color: rgb(28, 133, 165);
+        animation: animacion-datos-light 1s;
+        animation-fill-mode: forwards;
+    }
+
+    .texto-martis div::-webkit-scrollbar-thumb:hover,
+    .texto-martis-invertido div::-webkit-scrollbar-thumb:hover {
+        background: rgb(28, 133, 165);
+    }
+}
+
+/*********************************************************/
+/*********************************************************/
+/*************************mobile**************************/
+/*********************************************************/
+/*********************************************************/
+@media only screen and (max-width: 992px) {
+    body section button p {
+        background-color: yellow;
+        color: black;
+        margin: 30px 30% 30px;
+    }
+
+    header nav div {
+        justify-content: center;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .container-fluid {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: none;
+        color: white;
+        left: 0px;
+        top: 0px;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .video-container {
+        height: 300px;
+    }
+
+    .articulos {
+        width: 400px;
+        min-height: 260px;
+        margin: 15px;
+    }
+
+    .articulos img {
+        min-height: 100px;
+        min-width: 310px;
+    }
+
+
+    .contacto-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contenedor_martis,
+    .contenedor_martis_invertido {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0px;
+        overflow: hidden;
+    }
+
+    .contenedor_martis div,
+    .contenedor_martis_invertido div {
+        height: 50%;
+    }
+
+    .contenedor_martis_invertido {
+        flex-direction: column-reverse;
+        margin: 0px;
+        overflow: hidden;
+    }
+
+    .separador {
+        display: none;
+    }
+
+    .texto-martis {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(180deg, transparent, black 30%);
+        width: 100%;
+    }
+
+    .texto-martis:hover {
+        animation: animacion-texto-martis-celular 2s;
+        animation-fill-mode: forwards;
+    }
+
+    .texto-martis-invertido {
+        background: linear-gradient(180deg, transparent, black 30%);
+        width: 100%;
+    }
+
+    .texto-martis-invertido:hover {
+        animation: animacion-texto-martis-celular 2s;
+        animation-fill-mode: forwards;
+    }
+
+    .texto-martis div {
+        overflow-y: scroll;
+    }
+
+    .texto-martis-invertido div {
+        overflow-y: scroll;
+    }
+
+    .texto-martis div,
+    .texto-martis h2 {
+        margin-left: 15px;
+        margin-right: 15px;
+        text-align: justify;
+    }
+
+    .texto-martis-invertido div,
+    .texto-martis-invertido h2 {
+        margin-left: 15px;
+        margin-right: 15px;
+        text-align: center;
+        text-align: justify;
+    }
+
+    .horizon_devices {
+        background-image: url("../img/Marcas/Horizon_devices.webp");
+    }
+
+    .contenedor_galeria {
+        width: 100%;
+    }
+
+    .img-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto;
+        grid-row: repeat(8, 1fr);
+    }
+
+    .img-container img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .videos-youtube {
+        grid-template-columns: auto;
+        grid-template-rows: repeat(4, 1fr);
+    }
+}
+
+/*********************************************************/
+/*********************************************************/
+/*************************desktop*************************/
+/*********************************************************/
+/*********************************************************/
+@media only screen and (min-width: 993px) {
+    body section button p {
+        background-color: yellow;
+        color: black;
+        margin: 30px 30% 30px;
+    }
+
+    .contenedor_martis div,
+    .contenedor_martis_invertido div {
+        height: 100%;
+        width: 50%;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .contenedor_martis_invertido div {
+        height: 100%;
+        width: 50%;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .contenedor_martis,
+    .contenedor_martis_invertido {
+        margin: 15px 100px 15px;
+        overflow: hidden;
+    }
+
+    .texto-martis {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        background: linear-gradient(90deg, transparent, black 30%);
+    }
+
+    .texto-martis-invertido {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        background: linear-gradient(270deg, transparent, black 30%);
+    }
+
+    .texto-martis h2 {
+        grid-row: 2/3;
+        grid-column: 3/5;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .texto-martis div {
+        grid-row: 3/6;
+        grid-column: 3/5;
+        width: 100%;
+        align-items: center;
+        text-align: justify;
+        overflow-y: scroll;
+    }
+
+    .texto-martis-invertido h2 {
+        grid-row: 2/3;
+        grid-column: 2/4;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .texto-martis-invertido div {
+        grid-row: 3/6;
+        grid-column: 2/4;
+        width: 100%;
+        align-items: center;
+        text-align: justify;
+        text-align: justify;
+        overflow-y: scroll;
+    }
+
+
+    .contenedor_galeria {
+        width: 100%;
+    }
+
+    .img-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto;
+        grid-row: repeat(8, 1fr);
+    }
+
+    .img-container img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .videos-youtube {
+        grid-template-columns: auto;
+        grid-template-rows: repeat(2, 400px);
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    .img-container img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .tres {
+        grid-column: 2/5;
+        grid-row: 1/4;
+    }
+
+    .cinco {
+        grid-column: 1/3;
+        grid-row: 4/5;
+    }
+
+    .seis {
+        grid-column: 1/3;
+        grid-row: 5/6;
+    }
+
+    .siete {
+        grid-column: 3/5;
+        grid-row: 4/5;
+    }
+
+    .ocho {
+        grid-column: 3/5;
+        grid-row: 5/6;
+    }
+}
+
+@keyframes animacion-texto-martis {
+    from {
+        width: 50%;
+    }
+
+    to {
+        width: 80%;
+    }
+}
+
+@keyframes animacion-texto-martis-invertido {
+    from {
+        width: 50%;
+    }
+
+    to {
+        width: 80%;
+    }
+}
+
+@keyframes animacion-texto-martis-celular {
+    from {
+        height: 50%;
+    }
+
+    to {
+        height: 100%;
+    }
+}
+
+@keyframes animacion-articulos-dark {
+    from {
+        background-color: inherit;
+        box-shadow: 0px 0px 10px rgb(32, 153, 190);
+    }
+
+    to {
+        background-color: rgba(138, 129, 129, 0.9);
+        box-shadow: 0px 0px 20px rgb(71, 13, 100);
+    }
+}
+
+@keyframes animacion-articulos-light {
+    from {
+        box-shadow: 0px 0px 10px rgb(71, 13, 100);
+    }
+
+    to {
+        box-shadow: 0px 0px 20px rgb(32, 153, 190);
+    }
+}
+
+@keyframes animacion-datos-dark {
+    from {
+        box-shadow: 0px 0px 10px rgb(75, 82, 88);
+    }
+
+    to {
+        box-shadow: 0px 0px 20px rgb(109, 21, 153);
+    }
+}
+
+@keyframes animacion-datos-light {
+    from {
+        box-shadow: 0px 0px 10px rgb(75, 82, 88);
+    }
+
+    to {
+        box-shadow: 0px 0px 20px rgb(32, 153, 190);
+    }
+}
+
+/*# sourceMappingURL=styles.CSS.map */

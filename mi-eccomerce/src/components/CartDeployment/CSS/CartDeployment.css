@@ -1,0 +1,27 @@
+.cart-deploy{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    right: 0px;
+    border-style: solid;
+    border-color: rgb(71, 13, 100);
+    background-color: black;
+    width: 20vw;
+    height: 100vh;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    color: white;
+    text-align: center;
+}
+
+.cart-name{
+    background-color: rgb(71, 13, 100);
+    margin: 0px;
+}
+
+.cart-products{
+    height: 100%;
+    overflow-y: scroll;
+}
