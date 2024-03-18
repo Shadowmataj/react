@@ -4,7 +4,7 @@
     src: url("../fonts/Oswald/Oswald-VariableFont_wght.ttf");
 }
 
-.cart-icon:hover{
+.cart-icon:hover {
     cursor: pointer;
 }
 
@@ -18,7 +18,8 @@ a:link {
     color: white;
     text-decoration: none;
 }
-a:visited{
+
+a:visited {
     color: white;
     text-decoration: none;
 }
@@ -65,11 +66,11 @@ a:visited{
     margin: 15px;
 }
 
-.loading-screen{
-    display: flex; 
-    align-items: center; 
+.loading-screen {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    color: white; 
+    color: white;
     height: 15vh;
 }
 
@@ -386,6 +387,22 @@ iframe {
         border: none;
     }
 
+    .cart-deploy {
+        border-color: rgb(71, 13, 100);
+    }
+
+    .articulo-cart {
+        border-bottom-color: rgb(71, 13, 100);
+    }
+
+    .cart-item-text {
+        background: linear-gradient(90deg, transparent, black 20%);
+    }
+
+    .cart-deploy {
+        background-color: black;
+    }
+
     hr {
         background-color: rgb(71, 13, 100);
         border-color: rgb(71, 13, 100);
@@ -449,6 +466,23 @@ iframe {
         box-shadow: 0px 0px 20px rgb(32, 153, 190);
         animation: animacion-articulos-light 1s;
         animation-fill-mode: forwards;
+    }
+
+    .cart-deploy {
+        border-color: rgb(32, 153, 190);
+    }
+
+    .articulo-cart {
+        background-color: rgb(63, 84, 96);
+        border-bottom-color: rgb(32, 153, 190);
+    }
+
+    .cart-item-text {
+        background: linear-gradient(90deg, transparent, rgb(63, 84, 96) 20%);
+    }
+
+    .cart-deploy {
+        background-color: rgb(63, 84, 96);
     }
 
     .compras {
@@ -641,6 +675,18 @@ iframe {
     }
 
     .contenedor_galeria {
+        width: 100%;
+    }
+
+    .recap-container{
+        flex-direction: column;
+    }
+
+    .order-id{
+        width: 100%;
+    }
+
+    .recap{
         width: 100%;
     }
 

@@ -4,12 +4,12 @@ import './CSS/ProductFilter.css'
 export const ProductFilter = ({ categories }) => {
     return (
         <div className="filter-container">
-            <Link to='/productos/base'>
+            <Link to='/products'>
                 <button className="btn btn-light">TODOS LOS PRODUCTOS</button>
             </Link>
             {
                 categories.map(cat => (
-                    <Link to={`/productos/${cat}`}>
+                    <Link to={`/products/${cat}`}>
                         <button className="btn btn-light">{cat.toUpperCase()}</button>
                     </Link>
                 ))

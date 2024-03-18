@@ -1,32 +1,39 @@
-import { useEffect, useState } from "react"
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductsList } from "../../Base de datos";
-import { ArticleDetails } from "../ArticleDetail/ArticleDetails";
+import { db } from "../../config/FireBaseConfig";
+import { ArticleDetails } from "../ArticleDetails/ArticleDetails";
 
 export const ArticlesDetailsContainer = () => {
-    const [articulo, setArticulo] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
     const { id } = useParams()
 
-    const getArticles = (id) => {
-        getProductsList()
+    const [articulo, setArticulo] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const getArticlesDB = (id) => {
+        const myArticle = doc(db, "products", id)
+        setIsLoading(true)
+        getDoc(myArticle)
             .then(resp => {
-                const art = resp.find(article => article.id == id)
-                setArticulo(art)
+                const product = {
+                    id: resp.id,
+                    ...resp.data()
+                }
+                setArticulo(product)
                 setIsLoading(false)
             })
-            .catch(err => console.log(err))
-            .finally(console.log("Carga de información terminada."))
     }
 
     useEffect(() => {
-        getArticles(id)
+        getArticlesDB(id)
     }, []);
 
     return (
         <>
-            {isLoading ? (<h2 style={{ textAlign: 'center', color: "white" }}>Loading...</h2>) : <ArticleDetails nombre={articulo.nombre} imagen={articulo.imagen} precio={articulo.precio} text={articulo.texto} inventory={articulo.inventory}/>
+            {
+            isLoading ? (<h2 style={{ textAlign: 'center', color: "white" }}>Loading...</h2>) : (<ArticleDetails {...articulo} />)
             }
         </>
     )
 }
+

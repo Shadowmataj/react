@@ -1,10 +1,17 @@
-# React + Vite
+# Boost Music project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Objetivo del proyecto:
+###### El objetivo de este proyecto es el de aprobar mi curso de React JS, que actualmente estoy cursando en la plataforma de Coderhouse. El objetivo del proyecto es proponer una nueva plataforma, ya que venimos manejamos actualmente la página con Wix, pero debido a los limitantes de la plataforma, esta opción se presenta más amena.
 
-Currently, two official plugins are available:
+## Tecnologías:
+- Vite
+- React
+- Sweet Alert2
+- Firebase
+- React Router DOM
+- Bootstrap 5
+- React icons
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# react
-# react
+### Datos de contacto:
+###### mail: christianmataj1@gmail.com
+###### teléfono: 5568897613

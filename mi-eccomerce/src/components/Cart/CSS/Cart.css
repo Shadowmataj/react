@@ -2,24 +2,37 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    flex-grow: 2;
-    flex-shrink: 1;
-    align-items: center;
+    align-items: end;
     justify-content: center;
     width: 100%;
-    border-style: solid;
-    border-color: rgb(71, 13, 100);
+    height: 30vh;
     color: white;
     text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    border-radius: 15px;
+    border-bottom-style: solid;
+
 }
 
-.articulo-cart strong {
-    position: absolute;
-    top: 5px;
-}
-
-.articulo-cart img {
+.img-article-cart {
     width: 100%;
-    transform: scale(0.7);
-    padding-top: 60px;
+    transform: scale(1);
+}
+
+.cart-item-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    width: 50%;
+    height: 100%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.update-item{
+    display: flex;
+    flex-direction: column;
 }

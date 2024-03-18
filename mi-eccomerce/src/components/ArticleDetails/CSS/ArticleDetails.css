@@ -39,7 +39,7 @@
     height: 40px;
 }
 
-.inventory-products{
+.stock-products{
     display: flex;
     flex-direction: column;
     align-items: center;

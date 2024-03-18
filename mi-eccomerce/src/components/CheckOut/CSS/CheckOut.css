@@ -1,0 +1,36 @@
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-bottom: 10vh;
+}
+
+.form-control {
+    width: 40vw;
+    
+}
+
+.checkout-button{
+    width: 100%;
+}
+
+.order-id{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    gap: 5vh
+}
+
+.recap-container{
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    margin: 5vh 0vh 5vh;
+}
+
+.recap{
+    width: 50%;
+}

@@ -1,24 +1,34 @@
-import { getMarcasList } from "../../Base de datos";
-import { useState, useEffect } from "react";
-import './CSS/Marcas.css'
+import { useEffect, useState } from "react";
 import { Banners } from "../Banners/Banners";
 import { MarcasContainer } from "../MarcasContainer/MarcasContainer";
+import { collection, getDocs } from "firebase/firestore"
+import { db } from "../../config/FireBaseConfig"
+import './CSS/Marcas.css';
 
 export const Marcas = () => {
 
     const [marcas, setMarcas] = useState([]);
-
-    const getMarcas = () => {
-        getMarcasList().
-            then(resp => {
-                setMarcas(resp)
+    const [isLoading, setIsLoading] = useState(true);
+    const getBrandsDB = () => {
+        // Referencia a nuestra base de datos.
+        const myBrands = collection(db, "brands")
+        setIsLoading(true)
+        getDocs(myBrands)
+            .then(resp => {
+                const brandsList = resp.docs.map(itm => {
+                    const item = {
+                        id: itm.id,
+                        ...itm.data(),
+                    }
+                    return item
+                })
+                setMarcas(brandsList)
+                setIsLoading(false)
             })
-            .catch(err => console.log(err))
-            .finally(console.log("Carga de información terminada."))
-        console.log(marcas)
     }
+
     useEffect(() => {
-        getMarcas()
+        getBrandsDB()
     }, []);
 
 
@@ -26,12 +36,15 @@ export const Marcas = () => {
     return (
         <>
             <Banners banner={"Marcas"} />
-            <section className="martis-container">
-                <hr></hr>
-                {marcas.map(marca => (
-                    <MarcasContainer key={marca.id} marca={marca} />
-                ))}
-            </section>
+            {isLoading ? (<h2 style={{ height: "63vh" }} className="loading-screen">Loading...</h2>) :
+                (
+                    <section className="martis-container">
+                        <hr></hr>
+                        {marcas.map(marca => (
+                            <MarcasContainer key={marca.id} marca={marca} />
+                        ))}
+                    </section>
+                )}
         </>
     )
 }

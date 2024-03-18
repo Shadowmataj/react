@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { CartWidget } from "../CartWidget/CartWidget"
 
 
 export const Header = () => {
@@ -21,11 +22,15 @@ export const Header = () => {
                             <b className='separador'>|</b>
                             <Link to='/artistas'>Artistas</Link>
                             <b className='separador'>|</b>
-                            <Link to='/productos/base'>Productos</Link>
+                            <Link to='/products'>Productos</Link>
                             <b className='separador'>|</b>
                             <Link to='/galeria'>Galería</Link>
                             <b className='separador'>|</b>
                             <Link to='/opiniones'>Opiniones</Link>
+                            <b className='separador'>|</b>
+                            <Link to='/cart'>
+                                <CartWidget />
+                            </Link>
                         </div>
                     </div>
                 </div>

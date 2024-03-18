@@ -1,26 +1,32 @@
-import { getProductsList } from "../../Base de datos";
-import { useState, useEffect } from "react";
+import { query, getDocs, limit, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../../config/FireBaseConfig";
 import { Articles } from "../Articles/Articles";
-import './CSS/Index.css'
 import { Contact } from "../Contact/Contact";
+import './CSS/Index.css';
 
 export const Index = () => {
 
     const [articulos, setArticulos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const getArticles = () => {
-        getProductsList().
-            then(resp => {
-                const filtro = resp.filter(articulo => articulo.id < 7)
-                setArticulos(filtro)
+    const getArticlesDB = () => {
+        const myArticle = query(collection(db, "products"), limit(6))
+        setIsLoading(true)
+        getDocs(myArticle)
+            .then(resp => {
+                const myArticleList = resp.docs.map(itm => {
+                    const item = {
+                        id: itm.id,
+                        ...itm.data()
+                    }
+                    return item
+                })
+                setArticulos(myArticleList)
                 setIsLoading(false)
             })
-            .catch(err => console.log(err))
-            .finally(console.log("Carga de artículos terminada."))
-        console.log(articulos)
     }
     useEffect(() => {
-        getArticles()
+        getArticlesDB()
     }, []);
 
 
@@ -35,7 +41,7 @@ export const Index = () => {
                 (<section className="producto">
                     {/* <!-- Sección de productos principales-- > */}
                     {articulos.map((articulo) => (
-                        <Articles key={articulo.id} article={articulo} />
+                        <Articles key={articulo.id} {...articulo} />
                     )
                     )}
                 </section>
