@@ -593,6 +593,10 @@ iframe {
         min-width: 310px;
     }
 
+    .text-container{
+        flex-direction: column-reverse;
+        row-gap: 4vh;
+    }
 
     .contacto-container {
         display: flex;
