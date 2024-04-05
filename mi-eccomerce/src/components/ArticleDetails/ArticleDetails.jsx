@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../Context/CartContext";
 import { ItemCount } from "../ItemCount/ItemCount";
@@ -11,13 +11,19 @@ export const ArticleDetails = ({ id, nombre, imagen, precio, texto }) => {
 
     const { addItem, cart } = useContext(CartContext)
     const [stock, setStock] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
     const article = doc(db, "products", id)
 
-    getDoc(article)
-        .then(resp => {
-            setStock(resp.data().stock)
-        })
+    const getArticle = () => {
+        setIsLoading(true)
+        getDoc(article)
+            .then(resp => {
+                setStock(resp.data().stock)
+                setIsLoading(false)
+            })
+    }
+
 
     const addProduct = (quantity) => {
         const item = {
@@ -34,6 +40,9 @@ export const ArticleDetails = ({ id, nombre, imagen, precio, texto }) => {
             title: "Se agregó el producto al carrito"
         })
     }
+    useEffect(() => {
+        getArticle()
+    }, []);
 
 
     const onAdd = (quantity) => {
@@ -68,7 +77,7 @@ export const ArticleDetails = ({ id, nombre, imagen, precio, texto }) => {
                 </div>
                 <div className="stock-products">
                     <h2>Precio: ${precio}</h2>
-                    <ItemCount stock={stock} onAdd={onAdd} />
+                    {isLoading ?  (<h3>Loading...</h3>) : (< ItemCount stock={stock} onAdd={onAdd} />)}
                     <Link to={'/products'}>
                         <button className="btn btn-dark mt-1">Volver</button>
                     </Link>

@@ -93,11 +93,11 @@ export const CheckOut = () => {
             <div className="checkout-container">
                 <form onSubmit={handlerSubmit}>
                     <label htmlFor="">Nombre </label>
-                    <input type="text" className="form-control" value={formCheckOut.name} onChange={handleName} />
+                    <input type="text" className="form-control" value={formCheckOut.name} onChange={handleName} required/>
                     <label htmlFor="">Teléfono </label>
-                    <input type="tel" className="form-control" value={formCheckOut.phone} onChange={handlePhone} />
+                    <input type="tel" className="form-control" value={formCheckOut.phone} onChange={handlePhone} required/>
                     <label htmlFor="">Email </label>
-                    <input type="email" className="form-control" value={formCheckOut.email} onChange={handleEmail} />
+                    <input type="email" className="form-control" value={formCheckOut.email} onChange={handleEmail} required/>
                     <input type="submit" className="btn btn-success mt-3 form-control checkout-button" value="Terminar la compra" />
                 </form>
             </div>
