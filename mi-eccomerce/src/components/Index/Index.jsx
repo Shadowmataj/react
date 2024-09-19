@@ -4,26 +4,21 @@ import { db } from "../../config/FireBaseConfig";
 import { Articles } from "../Articles/Articles";
 import { Contact } from "../Contact/Contact";
 import './CSS/Index.css';
+import config from "../../config/config";
 
 export const Index = () => {
 
-    const [articulos, setArticulos] = useState([]);
+    const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const getArticlesDB = () => {
-        const myArticle = query(collection(db, "products"), limit(6))
         setIsLoading(true)
-        getDocs(myArticle)
-            .then(resp => {
-                const myArticleList = resp.docs.map(itm => {
-                    const item = {
-                        id: itm.id,
-                        ...itm.data()
-                    }
-                    return item
-                })
-                setArticulos(myArticleList)
+        fetch(`${config.BACKEND_ROUTE}/api/products?limit=9&page=1`)
+            .then(resp => resp.json())
+            .then(data => {
+                setArticles(data.payload)
                 setIsLoading(false)
-            })
+            }
+            )
     }
     useEffect(() => {
         getArticlesDB()
@@ -40,8 +35,8 @@ export const Index = () => {
             {isLoading ? (<h2 className="loading-screen">Loading...</h2>) :
                 (<section className="producto">
                     {/* <!-- Sección de productos principales-- > */}
-                    {articulos.map((articulo) => (
-                        <Articles key={articulo.id} {...articulo} />
+                    {articles.map((articulo) => (
+                        <Articles key={articulo._id} {...articulo} />
                     )
                     )}
                 </section>

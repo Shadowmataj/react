@@ -1,31 +1,22 @@
 import { useEffect, useState } from "react";
+import config from "../../config/config";
 import { ArtistContainer } from "../ArtistContainer/ArtistContainer";
 import { Banners } from "../Banners/Banners";
-import { db } from "../../config/FireBaseConfig"
 import './CSS/Artistas.css';
-import { collection, getDocs } from "firebase/firestore";
 
 export const Artistas = () => {
 
-    const [artistas, setArtistas] = useState([]);
+    const [artists, setArtists] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const getArtistsDB = () => {
-        const myArtists = collection(db, "artists")
         setIsLoading(true)
-        getDocs(myArtists)
-            .then(resp => {
-                let artistas = []
-                const artistsList = resp.docs
-                artistsList.map(itm => {
-                    const item = {
-                        id: itm.id,
-                        ...itm.data()
-                    }
-                    artistas = [...artistas, item]
-                })
-                setArtistas(artistas)
+        fetch(`${config.BACKEND_ROUTE}/api/artists`)
+            .then(resp => resp.json())
+            .then(data => {
+                setArtists(data.payload)
                 setIsLoading(false)
-            })
+            }
+            )
     }
     useEffect(() => {
         getArtistsDB()
@@ -40,8 +31,8 @@ export const Artistas = () => {
                 (
                     <section className="martis-container">
                         <hr></hr>
-                        {artistas.map(artista => (
-                            <ArtistContainer key={artista.id} artista={artista} />
+                        {artists.map(artist => (
+                            <ArtistContainer key={artist._id} artist={artist} />
                         ))}
                     </section>
                 )}

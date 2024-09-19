@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom"
 import { CartWidget } from "../CartWidget/CartWidget"
+import "./CSS/Header.css"
+import { UserContext } from "../../Context/UserContext"
+import { useContext } from "react"
 
 
 export const Header = () => {
+
+    const { user } = useContext(UserContext)
+
     return (
         <header>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -31,10 +37,21 @@ export const Header = () => {
                             <Link to='/cart'>
                                 <CartWidget />
                             </Link>
+                            <div div className="sessions-container">
+                                {
+                                    user === null ?
+                                        (
+                                            <Link to="./login">Iniciar sesión</Link>
+                                        ) :
+                                        (
+                                            <Link to="./profile">Sesión</Link>
+                                        )
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
             </nav>
-        </header>
+        </header >
     )
 }

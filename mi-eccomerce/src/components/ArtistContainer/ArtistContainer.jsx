@@ -1,16 +1,16 @@
 import './CSS/ArtistContainer.css'
 
-export const ArtistContainer = ({ artista }) => {
+export const ArtistContainer = ({ artist }) => {
     return (
-        <div className={`${artista.classconten}`} style={{backgroundImage: `url(${artista.imagen})`, backgroundPosition: `${artista.backpos}`}}>
-            {artista.textposition == "texto-martis" && <div className="relleno"></div>}
-            <div className={`${artista.textposition}`}>
-                <h2>{artista.nombre}</h2>
+        <div className={`${artist.classconten}`} style={{backgroundImage: `url(${artist.image})`, backgroundPosition: `${artist.backpos}`}}>
+            {artist.textposition == "texto-martis" && <div className="relleno"></div>}
+            <div className={`${artist.textposition}`}>
+                <h2>{artist.name}</h2>
                 <div>
-                    {artista.texto}
+                    {artist.description}
                 </div>
             </div>
-            {artista.textposition == "texto-martis-invertido" && <div className="relleno"></div>}
+            {artist.textposition == "texto-martis-invertido" && <div className="relleno"></div>}
         </div>
     )
 }

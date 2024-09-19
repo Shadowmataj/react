@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
-export const Articles = ({ nombre, imagen, id, precio }) => {
+export const Articles = ({ name, thumbnails, _id, price }) => {
 
     return (
         <article className="articulos">
-            <strong>{nombre}</strong>
-            <img className="img-article" src={`https://static.wixstatic.com/media/${imagen}`} alt="Guitarra_ESP/LTD"></img>
+            <strong>{name}</strong>
+            <img className="img-article" src={`https://static.wixstatic.com/media/${thumbnails}`} alt="Guitarra_ESP/LTD"></img>
             <div className="compras">
-                <div> Precios: ${precio}</div>
-                <Link to={`/details/${id}`}>
+                <div> Precios: ${price}</div>
+                <Link to={`/details/${_id}`}>
                     <button className="buy-button">Detalles</button>
                 </Link>
             </div>

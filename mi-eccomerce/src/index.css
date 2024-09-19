@@ -556,6 +556,10 @@ iframe {
         margin: 30px 30% 30px;
     }
 
+    .sessions-container{
+        position:initial;
+    }
+
     header nav div {
         justify-content: center;
         gap: 5px;
@@ -722,6 +726,12 @@ iframe {
         background-color: yellow;
         color: black;
         margin: 30px 30% 30px;
+    }
+
+    .sessions-container{
+        position: absolute;
+        top: -4vh;
+        right: -30vw;
     }
 
     .contenedor_martis div,

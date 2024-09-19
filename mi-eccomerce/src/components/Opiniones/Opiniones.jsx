@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
+import config from "../../config/config";
 import { Banners } from "../Banners/Banners";
 import { OpinionesContainer } from "../OpinionesContainer/OpinionesContainer";
-import { collection, getDocs } from "firebase/firestore"
-import { db } from "../../config/FireBaseConfig"
 
 
 
@@ -12,20 +11,14 @@ export const Opiniones = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const getOpinionsDB = () => {
-        const myOpinions = collection(db, "opinions")
         setIsLoading(true)
-        getDocs(myOpinions)
-            .then(resp => {
-                const opinionsList = resp.docs.map(itm => {
-                    const item = {
-                        id: itm.id,
-                        ...itm.data()
-                    }
-                    return item
-                })
-                setOpiniones(opinionsList)
+        fetch(`${config.BACKEND_ROUTE}/api/comments`)
+            .then(resp => resp.json())
+            .then(data => {
+                setOpiniones(data.payload)
                 setIsLoading(false)
-            })
+            }
+            )
     }
 
 

@@ -1,32 +1,24 @@
 import { useEffect, useState } from "react";
 import { Banners } from "../Banners/Banners";
 import { MarcasContainer } from "../MarcasContainer/MarcasContainer";
-import { collection, getDocs } from "firebase/firestore"
-import { db } from "../../config/FireBaseConfig"
 import './CSS/Marcas.css';
+import config from "../../config/config";
 
 export const Marcas = () => {
 
-    const [marcas, setMarcas] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const getBrandsDB = () => {
-        // Referencia a nuestra base de datos.
-        const myBrands = collection(db, "brands")
+        
         setIsLoading(true)
-        getDocs(myBrands)
-            .then(resp => {
-                const brandsList = resp.docs.map(itm => {
-                    const item = {
-                        id: itm.id,
-                        ...itm.data(),
-                    }
-                    return item
-                })
-                setMarcas(brandsList)
+        fetch(`${config.BACKEND_ROUTE}/api/brands`)
+            .then(resp => resp.json())
+            .then(data => {
+                setBrands(data.payload)
                 setIsLoading(false)
-            })
+            }
+            )
     }
-
     useEffect(() => {
         getBrandsDB()
     }, []);
@@ -40,8 +32,8 @@ export const Marcas = () => {
                 (
                     <section className="martis-container">
                         <hr></hr>
-                        {marcas.map(marca => (
-                            <MarcasContainer key={marca.id} marca={marca} />
+                        {brands.map(brand => (
+                            <MarcasContainer key={brand._id} brand={brand} />
                         ))}
                     </section>
                 )}

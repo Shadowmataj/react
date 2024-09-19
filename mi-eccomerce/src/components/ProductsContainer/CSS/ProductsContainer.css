@@ -1,0 +1,15 @@
+.page-buttons{
+    width: 100%;
+    text-align: center;
+    color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 15px;
+}
+.page-buttons p{
+    width: 5vw;
+    height: 5vh;
+    margin: 0px;
+}

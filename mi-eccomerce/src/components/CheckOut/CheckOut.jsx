@@ -1,5 +1,5 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { db } from "../../config/FireBaseConfig";
 import { Banners } from "../Banners/Banners";
