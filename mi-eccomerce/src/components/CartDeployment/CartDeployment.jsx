@@ -42,7 +42,7 @@ export const CartDeployment = () => {
                 {cartTotal < 1 ? (<h4>El carrito está vacío </h4>) :
                     <>
                         {cart.map(article =>
-                            < Cart key={article.id} {...article} />
+                            < Cart key={article._id} {...article} />
                         )}
                         <div>Total: ${cartTotal}</div>
                         <div className='mb-3 mt-3'>

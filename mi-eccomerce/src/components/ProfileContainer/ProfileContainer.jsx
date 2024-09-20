@@ -8,12 +8,13 @@ import { CartContext } from "../../Context/CartContext"
 
 export const ProfileContainer = () => {
 
-    const [ cookies, setCookies] = useCookies(["boostCookie"])
+    
+    const [setCookie, removeCookie] = useCookies(["boostCookie"])
     const { user, clearUser } = useContext(UserContext)
     const { clearCart } = useContext(CartContext)
 
     const removeToken = () => {
-        setCookies(cookies.boostCookie, "undefined")
+        removeCookie("boostCookie")
         clearUser()
         clearCart()
     }

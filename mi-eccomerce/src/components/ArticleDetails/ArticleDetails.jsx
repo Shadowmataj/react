@@ -46,7 +46,7 @@ export const ArticleDetails = ({ _id, title, thumbnails, price, description }) =
 
 
     const onAdd = (quantity) => {
-        const index = cart.findIndex(product => product.id == _id)
+        const index = cart.findIndex(product => product._id == _id)
         if (index != -1 && (cart[index].quantity + quantity > stock)) {
             Swal.fire({
                 icon: "error",

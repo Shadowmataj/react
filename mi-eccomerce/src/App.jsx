@@ -1,3 +1,4 @@
+import { CookiesProvider } from 'react-cookie'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import { ArticlesDetailsContainer } from './components/ArticleDetailContainer/ArticleDetailContainer'
@@ -16,7 +17,6 @@ import { ProfileContainer } from './components/ProfileContainer/ProfileContainer
 import { RegisterContainer } from './components/RegisterContainer/RegisterContainer'
 import { CartContextProvider } from './Context/CartContext'
 import { UserContextProvider } from './Context/UserContext'
-import { CookiesProvider } from 'react-cookie'
 
 function App() {
 
@@ -38,6 +38,7 @@ function App() {
               <Route path='/cart' element={<CartDeployment />} />
               <Route path='/checkout' element={<CheckOut />} />
               <Route path='/login' element={<LoginContainer />} />
+              <Route path='/login/:message' element={<LoginContainer />} />
               <Route path='/register' element={<RegisterContainer />} />
               <Route path='/profile' element={<ProfileContainer />} />
             </Routes>

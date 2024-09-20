@@ -39,7 +39,7 @@ export const Header = () => {
                             </Link>
                             <div div className="sessions-container">
                                 {
-                                    user === null ?
+                                    user ?
                                         (
                                             <Link to="./login">Iniciar sesión</Link>
                                         ) :

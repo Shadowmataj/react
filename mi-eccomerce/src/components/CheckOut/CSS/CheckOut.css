@@ -1,8 +1,17 @@
 .checkout-container {
+    max-width: 60vw;
+    margin: auto;
+    margin-top: 64px;
+    padding: 32px;
+    border-radius: 0.5em;
+    color: #333;
+    border: 1px solid #bbb;
+    background-color: #ccc;
+    text-align: center;
     display: flex;
     justify-content: center;
-    color: white;
-    margin-bottom: 10vh;
+    align-items: center;
+    flex-direction: column;
 }
 
 .form-control {

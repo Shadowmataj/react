@@ -8,14 +8,11 @@ export const Cart = ({ _id, title, thumbnails, price, quantity, subtotal }) => {
     const { cart, removeItem } = useContext(CartContext)
     const [stock, setStock] = useState();
 
-    console.log(_id)
-
     fetch(`${config.BACKEND_ROUTE}/api/products/${_id}`)
         .then(resp => resp.json())
         .then(data => {
             setStock(data.payload.stock)
-        }
-        )
+        })
 
     const handleRemoveItem = () => {
 

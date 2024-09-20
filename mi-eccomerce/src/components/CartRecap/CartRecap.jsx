@@ -1,11 +1,11 @@
 
-export const CartRecap = ({ nombre, imagen, quantity }) => {
+export const CartRecap = ({ title, thumbnails, quantity }) => {
 
     
     return (
-        <article className="articulo-cart" style={{ backgroundImage: `url("https://static.wixstatic.com/media/${imagen}")` }}>
+        <article className="articulo-cart" style={{ backgroundImage: `url("https://static.wixstatic.com/media/${thumbnails}")` }}>
             <div className="cart-item-text">
-                <strong>{nombre}</strong>
+                <strong>{title}</strong>
                 <div>Cantidad: {quantity}</div>
             </div>
 

@@ -3,12 +3,16 @@ import config from "../../config/config";
 import { Banners } from "../Banners/Banners";
 import "./CSS/LoginContainer.css";
 import { ErrorNotification } from "../ErrorNotification/ErrorNotification";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext"
 import { useCookies } from "react-cookie"
 import { CartContext } from "../../Context/CartContext";
+import { MessageNotification } from "../MessageNotification/MessageNotification";
 
 export const LoginContainer = () => {
+
+    const [searchParams] = useSearchParams()
+    const message = searchParams.get("message")
 
     const { user, saveUser } = useContext(UserContext)
     const { updateUserCart } = useContext(CartContext)
@@ -20,7 +24,7 @@ export const LoginContainer = () => {
         email: "",
         password: ""
     });
-    const [cookies, setCookies] = useCookies(["boostCookie"])
+    const [cookies, setCookie] = useCookies(["boostCookie"])
 
     const handleEmail = (e) => {
         setFormLogin({
@@ -51,8 +55,8 @@ export const LoginContainer = () => {
                 saveUser(data.payload)
                 const options = {
                     maxAge: data.maxAge
-                } 
-                setCookies(data.cookieName, data.token, options)
+                }
+                setCookie(data.cookieName, data.token, options)
                 setIsLoading(false)
             })
             .catch(err => {
@@ -86,11 +90,11 @@ export const LoginContainer = () => {
                         isLoading ?
                             (<h2 style={{ textAlign: 'center', color: "white" }} > Loading... </h2>) :
                             (<form onSubmit={getToken} style={{ marginTop: "32px" }}>
-                                <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
+                                <div className="input-group" style={{ marginBottom: "32px" }}>
                                     <input type="email" name="email" className="form-control" placeholder="Nombre" value={formLogin.email || ""} onChange={handleEmail} autoFocus="autoFocus" required></input>
                                 </div>
 
-                                <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
+                                <div className="input-group" style={{ marginBottom: "32px" }}>
                                     <input type="password" name="password" className="form-control" placeholder="Contraseña" value={formLogin.password || ""} onChange={handlePassword} required="required"></input>
                                 </div>
 
@@ -99,6 +103,13 @@ export const LoginContainer = () => {
                                         (<ErrorNotification message={errorMessage} />) :
                                         <></>
                                 }
+
+                                {
+                                    message ?
+                                        (<MessageNotification message={message} />) :
+                                        <></>
+                                }
+
                                 <div className="passport-options" style={{ marginTop: "24px" }}>
                                     <button className="btn btn-info submit_btn">Github</button>
                                     <button className="btn btn-info submit_btn">Google</button>

@@ -517,6 +517,10 @@ iframe {
         background-color: rgb(32, 153, 190);
         border-color: rgb(32, 153, 190);
     }
+    
+    form{
+        width: 100%;
+    }
 
     .container-fluid {
         background-color: rgb(32, 153, 190);

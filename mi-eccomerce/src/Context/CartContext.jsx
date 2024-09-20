@@ -29,7 +29,6 @@ export const CartContextProvider = ({ children }) => {
                 })
                 }
 
-            console.log(item)
             fetch(`${config.BACKEND_ROUTE}/api/carts/product/${item._id}`, options)
                 .then(resp => resp.json())
                 .then(data => {
@@ -41,7 +40,7 @@ export const CartContextProvider = ({ children }) => {
         // copia del carrito
         const cartCopy = [...cart]
         //   agrega productos al carrito.
-        const index = cartCopy.findIndex(product => product.id === item._id)
+        const index = cartCopy.findIndex(product => product._id === item._id)
         if (index != -1) {
             cartCopy[index].quantity = cartCopy[index].quantity + quantity
             cartCopy[index].subtotal = cartCopy[index].subtotal * cartCopy[index].quantity
@@ -68,7 +67,6 @@ export const CartContextProvider = ({ children }) => {
                 }
                 }
 
-                console.log(_id)
             fetch(`${config.BACKEND_ROUTE}/api/carts/${user.cart}/product/${_id}`, options)
                 .then(resp => resp.json())
                 .then(data => {
@@ -85,6 +83,25 @@ export const CartContextProvider = ({ children }) => {
     }
 
     const clearCart = () => {
+
+        if (user !== null) {
+            const options = {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': cookies.boostCookie
+                }
+                }
+            fetch(`${config.BACKEND_ROUTE}/api/carts/${user.cart}`, options)
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log(data.status)
+                }
+                ).catch(err => {
+                    console.log(err)
+                }
+                )
+        }
         setCart([])
     }
 
@@ -110,7 +127,6 @@ export const CartContextProvider = ({ children }) => {
             fetch(`${config.BACKEND_ROUTE}/api/carts/${user.cart}`, options)
                 .then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
                     const newProducts = []
                     for (let item of data.payload.products) {
                         const filtereProduct = {
