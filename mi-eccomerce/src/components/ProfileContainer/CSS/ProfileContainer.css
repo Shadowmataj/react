@@ -1,5 +1,6 @@
-.profile-container{
-    max-width: 60vw;
+.profile-container {
+    display: flex;
+    max-width: 95vw;
     margin: auto;
     margin-top: 64px;
     padding: 32px;
@@ -11,5 +12,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.user-buttons {
+    display: flex;
     flex-direction: column;
+}
+
+.vertical-line {
+    transform: rotate(90deg) scale(1.5);
+    width: 10%;
 }

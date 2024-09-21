@@ -16,7 +16,8 @@ import { ProductsContainer } from './components/ProductsContainer/ProductsContai
 import { ProfileContainer } from './components/ProfileContainer/ProfileContainer'
 import { RegisterContainer } from './components/RegisterContainer/RegisterContainer'
 import { CartContextProvider } from './Context/CartContext'
-import { UserContextProvider } from './Context/UserContext'
+import { UserContextProvider } from './context/UserContext'
+import Settings from './components/Settings/Settings'
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
               <Route path='/login/:message' element={<LoginContainer />} />
               <Route path='/register' element={<RegisterContainer />} />
               <Route path='/profile' element={<ProfileContainer />} />
+              <Route path='/admin/settings' element={<Settings />} />
             </Routes>
             <Footer />
           </CookiesProvider>

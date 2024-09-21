@@ -2,7 +2,7 @@ import './CSS/Footer.css'
 
 export const Footer = () => {
     return (
-        <footer>
+        <footer style={{position: "static", bottom: "0px", height: "15vh", width: "100%"}}>
             <br></br>
                 <nav>
                     <a href="https://www.facebook.com/Boost-Music-674070016282995/?modal=admin_todo_tour"><img src="../img/redes/facebook.png" alt="logo_facebook"></img></a>

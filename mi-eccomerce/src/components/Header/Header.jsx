@@ -39,13 +39,9 @@ export const Header = () => {
                             </Link>
                             <div div className="sessions-container">
                                 {
-                                    user ?
-                                        (
-                                            <Link to="./login">Iniciar sesión</Link>
-                                        ) :
-                                        (
-                                            <Link to="./profile">Sesión</Link>
-                                        )
+                                    user !== null ?
+                                        (<Link to="./profile">Sesión</Link>) :
+                                        (<Link to="./login">Iniciar sesión</Link>)
                                 }
                             </div>
                         </div>

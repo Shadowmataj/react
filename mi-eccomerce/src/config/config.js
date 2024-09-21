@@ -1,8 +1,7 @@
 
 
 const config = {
-    // BACKEND_ROUTE: "https://backend-proyecto-final-b07n.onrender.com",
-    BACKEND_ROUTE: "http://localhost:8080"
+    BACKEND_ROUTE: import.meta.env.VITE_BACKEND_ROUTE
 }
 
 export default config
