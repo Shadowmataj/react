@@ -1,22 +1,22 @@
 import { useContext } from "react"
-import { Banners } from "../Banners/Banners"
-import { UserContext } from "../../context/UserContext"
+import { Cookies, useCookies } from "react-cookie"
 import { Link, Navigate } from "react-router-dom"
-import "./CSS/ProfileContainer.css"
-import { useCookies } from "react-cookie"
 import { CartContext } from "../../Context/CartContext"
+import { UserContext } from "../../context/UserContext"
+import { Banners } from "../Banners/Banners"
+import "./CSS/ProfileContainer.css"
 
 export const ProfileContainer = () => {
 
 
-    const [setCookie, removeCookie] = useCookies(["boostCookie"])
+    const [ setCookie] = useCookies(["boostCookie"])
     const { user, clearUser } = useContext(UserContext)
-    const { clearCart } = useContext(CartContext)
+    const { clearFrontCart } = useContext(CartContext)
 
     const removeToken = () => {
-        removeCookie("boostCookie")
+        setCookie("boostCookie", "undefined", {maxAge: 0})
         clearUser()
-        clearCart()
+        clearFrontCart()
     }
 
     if (user === null) return (

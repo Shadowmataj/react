@@ -1,7 +1,7 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import { UserContext } from "./UserContext";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import config from "../config/config";
+import { UserContext } from "./UserContext";
 
 
 
@@ -10,7 +10,7 @@ export const CartContext = createContext(null)
 export const CartContextProvider = ({ children }) => {
 
     const { user } = useContext(UserContext)
-    const [cookies] = useCookies(["boostCookie"])
+    const [cookies, updateCookies] = useCookies(["boostCookie"])
     const [cart, setCart] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
     const [cartTotal, setCartTotal] = useState(0);
@@ -57,7 +57,6 @@ export const CartContextProvider = ({ children }) => {
 
     const removeItem = (_id) => {
         //   quitar un producto del carrito
-
         if (user !== null) {
             const options = {
                 method: "DELETE",
@@ -105,6 +104,10 @@ export const CartContextProvider = ({ children }) => {
         setCart([])
     }
 
+    const clearFrontCart =()=> {
+        setCart([])
+    }
+
     const totalCart = () => {
         const total = cart.reduce((acc, item) => acc + item.subtotal, 0)
         setCartTotal(total)
@@ -121,8 +124,7 @@ export const CartContextProvider = ({ children }) => {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
-                    'authorization': cookies.boostCookie
-                },
+                    'authorization': cookies.boostCookie                },
             }
             fetch(`${config.BACKEND_ROUTE}/api/carts/${user.cart}`, options)
                 .then(resp => resp.json())
@@ -140,7 +142,9 @@ export const CartContextProvider = ({ children }) => {
                         newProducts.push(filtereProduct)
                     }
                     setCart(newProducts)
-                })
+                }).catch(err => 
+                    console.log(err)
+                )
         }
     }
 
@@ -161,6 +165,7 @@ export const CartContextProvider = ({ children }) => {
         addItem,
         removeItem,
         clearCart,
+        clearFrontCart,
         updateUserCart
     }
     return <CartContext.Provider value={values}> {children} </CartContext.Provider>

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import config from "../../config/config";
-import { Banners } from "../Banners/Banners";
-import "./CSS/LoginContainer.css";
-import { ErrorNotification } from "../ErrorNotification/ErrorNotification";
+import { useCookies } from "react-cookie";
 import { Navigate, useSearchParams } from "react-router-dom";
-import { UserContext } from "../../Context/UserContext"
-import { useCookies } from "react-cookie"
+import config from "../../config/config";
 import { CartContext } from "../../Context/CartContext";
+import { UserContext } from "../../Context/UserContext";
+import { Banners } from "../Banners/Banners";
+import { ErrorNotification } from "../ErrorNotification/ErrorNotification";
 import { MessageNotification } from "../MessageNotification/MessageNotification";
+import "./CSS/LoginContainer.css";
 
 export const LoginContainer = () => {
 
@@ -24,7 +24,7 @@ export const LoginContainer = () => {
         email: "",
         password: ""
     });
-    const [cookies, setCookie] = useCookies(["boostCookie"])
+    const [setCookie ] = useCookies(["boostCookie"])
 
     const handleEmail = (e) => {
         setFormLogin({
@@ -51,12 +51,13 @@ export const LoginContainer = () => {
         fetch(`${config.BACKEND_ROUTE}/auth/jwtlogin`, options)
             .then(resp => resp.json())
             .then(data => {
-                setStatus(data.status)
-                saveUser(data.payload)
                 const options = {
                     maxAge: data.maxAge
                 }
                 setCookie(data.cookieName, data.token, options)
+                setStatus(data.status)
+                saveUser(data.payload)
+                updateUserCart()
                 setIsLoading(false)
             })
             .catch(err => {
@@ -69,10 +70,10 @@ export const LoginContainer = () => {
 
     useEffect(() => {
     }, []);
-    useEffect(() => {
-        updateUserCart()
-    }, [cookies.boostCookie]);
 
+    useEffect(() => {
+        
+    }, []);
 
     if (status === "OK" || user !== null) {
         return (
