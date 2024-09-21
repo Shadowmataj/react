@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import { Navigate, useSearchParams } from "react-router-dom";
 import config from "../../config/config";
 import { CartContext } from "../../Context/CartContext";
@@ -11,6 +11,8 @@ import "./CSS/LoginContainer.css";
 
 export const LoginContainer = () => {
 
+    const [ cookies, setCookie ] = useCookies(["boostCookie"])
+    
     const [searchParams] = useSearchParams()
     const message = searchParams.get("message")
 
@@ -24,7 +26,6 @@ export const LoginContainer = () => {
         email: "",
         password: ""
     });
-    const [setCookie ] = useCookies(["boostCookie"])
 
     const handleEmail = (e) => {
         setFormLogin({
@@ -42,6 +43,7 @@ export const LoginContainer = () => {
 
     const getToken = async (e) => {
         e.preventDefault()
+
         const options = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -61,6 +63,7 @@ export const LoginContainer = () => {
                 setIsLoading(false)
             })
             .catch(err => {
+                console.log(err.message)
                 setStatus("ERROR")
                 setErrorMessage("Usuario o contraseña no válidos")
                 setIsLoading(false)

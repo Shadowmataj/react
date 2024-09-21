@@ -9,7 +9,7 @@ import "./CSS/ProfileContainer.css"
 export const ProfileContainer = () => {
 
 
-    const [ setCookie] = useCookies(["boostCookie"])
+    const [ cookies, setCookie] = useCookies(["boostCookie"])
     const { user, clearUser } = useContext(UserContext)
     const { clearFrontCart } = useContext(CartContext)
 
