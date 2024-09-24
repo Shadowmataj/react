@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import config from "../../config/config";
 import { Banners } from "../Banners/Banners";
 import "./CSS/RegisterContainer.css";
 import { ErrorNotification } from "../ErrorNotification/ErrorNotification";
 import { Navigate } from "react-router-dom";
+import { PassportOptions } from "../PassportOptions/PassportOptions";
+import { UserContext } from "../../Context/UserContext";
 
 export const RegisterContainer = () => {
+
+    const { user } = useContext(UserContext)
 
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState();
@@ -84,7 +88,13 @@ export const RegisterContainer = () => {
         return (
             <Navigate to={"/login"} />
         )
-    }
+    } 
+    
+    if (user !== null) {
+        return (
+            <Navigate to={"/profile"} />
+        )
+    } 
 
     return (
         <>
@@ -94,45 +104,44 @@ export const RegisterContainer = () => {
                     isLoading ?
                         (<h2 style={{ textAlign: 'center', color: "white" }} > Loading... </h2>) :
                         (
-                            <form onSubmit={handleRegistration} style={{ marginTop: "32px" }}>
-                                <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
-                                    <input type="text" name="firstName" className="form-control" placeholder="Nombre" value={formRegister.firstName || ""} onChange={handleFirstName} autoFocus="autoFocus" required></input>
+                            <>
+                                <div className="d-flex column-gap-3 justify-content-center align-content-center" style={{ marginTop: "15px" }}>
+                                    <PassportOptions />
                                 </div>
+                                <form onSubmit={handleRegistration} style={{ marginTop: "32px" }}>
+                                    <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
+                                        <input type="text" name="firstName" className="form-control" placeholder="Nombre" value={formRegister.firstName || ""} onChange={handleFirstName} autoFocus="autoFocus" required></input>
+                                    </div>
 
-                                <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
-                                    <input type="text" name="lastName" className="form-control" placeholder="Apellido" value={formRegister.lastName || ""} onChange={handleLastName} required="required"></input>
-                                </div>
+                                    <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
+                                        <input type="text" name="lastName" className="form-control" placeholder="Apellido" value={formRegister.lastName || ""} onChange={handleLastName} required="required"></input>
+                                    </div>
 
-                                <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
-                                    <input type="email" name="email" className="form-control" placeholder="Email" value={formRegister.email || ""} onChange={handleEmail} required="required"></input>
-                                </div>
+                                    <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
+                                        <input type="email" name="email" className="form-control" placeholder="Email" value={formRegister.email || ""} onChange={handleEmail} required="required"></input>
+                                    </div>
 
-                                <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
-                                    <input type="number" name="age" className="form-control" placeholder="Edad" value={formRegister.age || ""} onChange={handleAge} required="required"></input>
-                                </div>
+                                    <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
+                                        <input type="number" name="age" className="form-control" placeholder="Edad" value={formRegister.age || ""} onChange={handleAge} required="required"></input>
+                                    </div>
 
-                                <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
-                                    <input type="password" name="password" className="form-control" placeholder="Contraseña" value={formRegister.password || ""} onChange={handlePassword} required="required"></input>
-                                </div>
+                                    <div className="input-group" style={{ width: "100%", marginBottom: "32px" }}>
+                                        <input type="password" name="password" className="form-control" placeholder="Contraseña" value={formRegister.password || ""} onChange={handlePassword} required="required"></input>
+                                    </div>
 
-                                {
-                                    status === "ERROR" ?
-                                        (<ErrorNotification message={errorMessage} />) :
-                                        <></>
-                                }
+                                    {
+                                        status === "ERROR" ?
+                                            (<ErrorNotification message={errorMessage} />) :
+                                            <></>
+                                    }
 
-                                <div className="passport-options" style={{ marginTop: "24px" }}>
-                                    <button className="btn btn-info submit_btn">Github</button>
-                                    <button className="btn btn-info submit_btn">Google</button>
-                                </div>
-                                <br></br>
-                                <br></br>
-                                <button type="submit" className="btn btn-success">Registrarse</button>
+                                    <button type="submit" className="btn btn-success">Registrarse</button>
 
-                                <div style={{ marginTop: "24px" }}>
-                                    ¿Ya tienes cuenta?: <a className="a2" href="login">Login</a>
-                                </div>
-                            </form>
+                                    <div style={{ marginTop: "24px" }}>
+                                        ¿Ya tienes cuenta?: <a className="a2" href="login">Login</a>
+                                    </div>
+                                </form>
+                            </>
                         )
                 }
             </div>

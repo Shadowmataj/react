@@ -1,8 +1,8 @@
 import { useContext } from "react"
-import { Cookies, useCookies } from "react-cookie"
+import { useCookies } from "react-cookie"
 import { Link, Navigate } from "react-router-dom"
 import { CartContext } from "../../Context/CartContext"
-import { UserContext } from "../../context/UserContext"
+import { UserContext } from "../../Context/UserContext"
 import { Banners } from "../Banners/Banners"
 import "./CSS/ProfileContainer.css"
 
@@ -23,6 +23,7 @@ export const ProfileContainer = () => {
         <Navigate to={"/login"} />
     )
 
+
     return (
         <>
             <Banners banner={"Profile"} />
@@ -39,7 +40,7 @@ export const ProfileContainer = () => {
                     </button>
 
                     {
-                        user.role === "admin" ?
+                        user.role !== "user" ?
                             (<button className="btn btn-success mt-2">
                                 <Link to='/admin/settings'>Settings</Link>
                             </button>):

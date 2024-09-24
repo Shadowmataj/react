@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { BiCart } from "react-icons/bi";
-import { CartContext } from "../../context/CartContext";
+import { CartContext } from "../../Context/CartContext";
 
 
 export const CartWidget = () => {

@@ -9,7 +9,7 @@ export const UsersSettings = ({ user }) => {
 
     const [cookies] = useCookies(["boostCookie"])
 
-    const [productEditor, setProductEditor] = useState(false);
+    const [userEditor, setUserEditor] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [newUser, setNewuser] = useState({
         _id: user._id,
@@ -26,12 +26,13 @@ export const UsersSettings = ({ user }) => {
             firstName: formRegister.firstName || "",
             lastName: formRegister.lastName || "",
             email: formRegister.email || "",
+            role: formRegister.role || "",
         })
-        setProductEditor(!productEditor)
+        setUserEditor(!userEditor)
     }
 
-    const handleProductEditor = () => {
-        setProductEditor(!productEditor)
+    const handleUserEditor = () => {
+        setUserEditor(!userEditor)
     }
 
     const handleDelete = () => {
@@ -52,7 +53,6 @@ export const UsersSettings = ({ user }) => {
                     }
                 }
                 setIsLoading(true)
-                console.log(user._id)
                 fetch(`${config.BACKEND_ROUTE}/api/users/${user._id}`, options)
                     .then(resp => resp.json())
                     .then(data => {
@@ -80,9 +80,9 @@ export const UsersSettings = ({ user }) => {
 
     if (newUser === null) return (
 
-        <user className="list-group-item d-flex  row align-items-center ">
+        <div className="list-group-item d-flex  row align-items-center ">
             <strong className="col-12"><strong>ESTE USUARIO HA SIDO ELIMINADO</strong></strong>
-        </user >
+        </div >
     )
 
     return (
@@ -90,20 +90,20 @@ export const UsersSettings = ({ user }) => {
             {
                 isLoading ?
                     (<h2 style={{ textAlign: 'center', color: "white" }} > Loading... </h2 >) :
-                    (<user className="list-group-item d-flex  row align-items-center ">
+                    (<div className="list-group-item d-flex  row align-items-center ">
                         <strong className="col-3">{newUser.firstName} {newUser.lastName}</strong>
                         <div className="col-4">{newUser.email}</div>
                         <div className="col-2">{newUser.role}</div>
                         <div className="col-2 d-flex">
-                            <button className="btn btn-secondary" onClick={handleProductEditor}>Editar</button>
+                            <button className="btn btn-secondary" onClick={handleUserEditor}>Editar</button>
                             <button className="btn btn-danger" onClick={handleDelete}>Eliminar</button>
                         </div>
                         {
-                            productEditor ?
+                            userEditor ?
                                 (<UsersEditor user={newUser} userChange={userChange} />) :
                                 <></>
                         }
-                    </user >)
+                    </div >)
             }
         </>
     )

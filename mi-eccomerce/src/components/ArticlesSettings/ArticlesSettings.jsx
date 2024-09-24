@@ -76,7 +76,11 @@ export const ArticlesSettings = ({ article }) => {
                         setIsLoading(false)
                     })
                     .catch(err => {
-                        console.log(err.message)
+                        Swal.fire({
+                            icon: "error",
+                            title: `${err.message}`
+                        })
+                        setIsLoading(false)
                     }
                     )
 

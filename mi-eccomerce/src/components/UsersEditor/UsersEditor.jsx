@@ -128,9 +128,6 @@ export const UsersEditor = ({ user, userChange }) => {
                                         (<ErrorNotification message={errorMessage} />) :
                                         <></>
                                 }
-
-                                <br></br>
-                                <br></br>
                                 <button type="submit" className="btn btn-success">Realizar cambios</button>
 
                             </form>

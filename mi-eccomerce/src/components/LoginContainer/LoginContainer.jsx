@@ -7,12 +7,15 @@ import { UserContext } from "../../Context/UserContext";
 import { Banners } from "../Banners/Banners";
 import { ErrorNotification } from "../ErrorNotification/ErrorNotification";
 import { MessageNotification } from "../MessageNotification/MessageNotification";
+
+
 import "./CSS/LoginContainer.css";
+import { PassportOptions } from "../PassportOptions/PassportOptions";
 
 export const LoginContainer = () => {
 
-    const [ cookies, setCookie ] = useCookies(["boostCookie"])
-    
+    const [cookies, setCookie, removeCookies, updateCookies] = useCookies(["boostCookie"])
+
     const [searchParams] = useSearchParams()
     const message = searchParams.get("message")
 
@@ -53,17 +56,16 @@ export const LoginContainer = () => {
         fetch(`${config.BACKEND_ROUTE}/auth/jwtlogin`, options)
             .then(resp => resp.json())
             .then(data => {
+                saveUser(data.payload)
                 const options = {
                     maxAge: data.maxAge
                 }
                 setCookie(data.cookieName, data.token, options)
+                location.reload()
                 setStatus(data.status)
-                saveUser(data.payload)
-                updateUserCart()
                 setIsLoading(false)
             })
             .catch(err => {
-                console.log(err.message)
                 setStatus("ERROR")
                 setErrorMessage("Usuario o contraseña no válidos")
                 setIsLoading(false)
@@ -71,18 +73,17 @@ export const LoginContainer = () => {
             )
     }
 
+    
     useEffect(() => {
-    }, []);
+        updateUserCart()
+    }, [user]);
 
-    useEffect(() => {
-        
-    }, []);
 
     if (status === "OK" || user !== null) {
         return (
             <Navigate to={"/profile"} />
         )
-    }
+    } 
 
     return (
 
@@ -114,12 +115,6 @@ export const LoginContainer = () => {
                                         <></>
                                 }
 
-                                <div className="passport-options" style={{ marginTop: "24px" }}>
-                                    <button className="btn btn-info submit_btn">Github</button>
-                                    <button className="btn btn-info submit_btn">Google</button>
-                                </div>
-                                <br></br>
-                                <br></br>
                                 <button type="submit" className="btn btn-success">Ingresar</button>
 
                                 <div style={{ marginTop: "24px" }}>
@@ -127,6 +122,9 @@ export const LoginContainer = () => {
                                 </div>
                             </form>)
                     }
+                    <div className="d-flex column-gap-3 justify-content-center align-content-center" style={{ marginTop: "15px" }}>
+                        <PassportOptions />
+                    </div>
                 </div>
             </div>
             <br /><br />

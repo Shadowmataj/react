@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import 'react-toastify/dist/ReactToastify.css';
 import Swal from "sweetalert2";
+
 import { UserContext } from "../../Context/UserContext";
-
-import { ErrorNotification } from "../ErrorNotification/ErrorNotification";
 import config from "../../config/config";
+import { ErrorNotification } from "../ErrorNotification/ErrorNotification";
+import { toast, ToastContainer } from "react-toastify";
 
-export const ProductsEditor = ({ article, articleChange}) => {
+export const ProductsCreator = () => {
 
     const [cookies] = useCookies(["boostCookie"])
 
@@ -15,15 +17,14 @@ export const ProductsEditor = ({ article, articleChange}) => {
     const [status, setStatus] = useState();
     const [errorMessage, setErrorMessage] = useState(null);
     const [formRegister, setFormRegister] = useState({
-        title: article.title || "",
-        description: article.description || "",
-        thumbnails: article.thumbnails || "",
-        price: article.price || 0,
-        category: article.category || "",
-        stock: article.stock || 0,
-        code: article.code || "",
-        status: article.status || "",
-        owner: user.role || "admin"
+        title: "",
+        description: "",
+        thumbnails: "",
+        price: 0,
+        category: "",
+        stock: 0,
+        code: "",
+        status: false,
     })
 
     const handleTitle = (e) => {
@@ -78,8 +79,9 @@ export const ProductsEditor = ({ article, articleChange}) => {
     const handleStatus = (e) => {
         setFormRegister({
             ...formRegister,
-            status: e.target.value
+            status: e.target.checked
         })
+        console.log(formRegister.status)
     }
 
     const handleRegistration = async (e) => {
@@ -87,7 +89,7 @@ export const ProductsEditor = ({ article, articleChange}) => {
 
         Swal.fire({
             icon: "question",
-            title: "¿Deseas modificar este producto?",
+            title: "¿Deseas Crear este producto?",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
             showConfirmButton: true,
@@ -95,7 +97,7 @@ export const ProductsEditor = ({ article, articleChange}) => {
         }).then(resp => {
             if (resp.isConfirmed) {
                 const options = {
-                    method: "PUT",
+                    method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
                         'authorization': cookies.boostCookie
@@ -103,21 +105,33 @@ export const ProductsEditor = ({ article, articleChange}) => {
                     body: JSON.stringify(formRegister)
                 }
                 setIsLoading(true)
-                fetch(`${config.BACKEND_ROUTE}/api/products/${article._id}`, options)
+                fetch(`${config.BACKEND_ROUTE}/api/products/`,options)
                     .then(resp => resp.json())
                     .then(data => {
                         if (data.status === "ERROR") throw new Error(data.type)
-
-                        articleChange(formRegister)
+                        setFormRegister({
+                            ...formRegister,
+                            title: "",
+                            description: "",
+                            thumbnails: "",
+                            price: 0,
+                            category: "",
+                            stock: 0,
+                            code: "",
+                            status: "",
+                        })
                         Swal.fire({
                             icon: "success",
-                            title: "El producto se ha modificado."
+                            title: "El producto se ha creado."
                         })
                         setIsLoading(false)
                     })
                     .catch(err => {
                         setStatus("ERROR")
-                        setErrorMessage(err.message)
+                        Swal.fire({
+                            icon: "error",
+                            title: "El producto no se ha podido crear."
+                        })
                         setIsLoading(false)
                     }
                     )
@@ -126,11 +140,12 @@ export const ProductsEditor = ({ article, articleChange}) => {
         })
     }
 
+
     useEffect(() => {
     }, []);
 
     return (
-        <div>
+        <div style={{ width: "80%" }}>
             <div className="register-container">
                 {
                     isLoading ?
@@ -174,7 +189,7 @@ export const ProductsEditor = ({ article, articleChange}) => {
 
                                 <div className="input-group d-flex gap-2" style={{ width: "100%", marginBottom: "32px" }}>
                                     <label className="align-content-center justify-content-center">Status: </label>
-                                    <input type="boolean" name="status" className="form-control" placeholder={formRegister.status} value={formRegister.status || ""} onChange={handleStatus} required="required"></input>
+                                    <input type="checkbox" checked={formRegister.status} name="status" onChange={handleStatus} value={formRegister.status} required="required"></input>
                                 </div>
 
                                 {
@@ -183,8 +198,7 @@ export const ProductsEditor = ({ article, articleChange}) => {
                                         <></>
                                 }
 
-                                <button type="submit" className="btn btn-success">Realizar cambios</button>
-
+                                <button type="submit" className="btn btn-success">Crear producto</button>
                             </form>
                         )
                 }

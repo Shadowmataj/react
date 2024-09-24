@@ -1,40 +1,44 @@
 import { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { Navigate } from "react-router-dom";
 import config from "../../config/config";
+import { UserContext } from "../../Context/UserContext";
 import { Banners } from "../Banners/Banners";
+import { DeleteUsersByTime } from "../DeleteUsersByTime/DeleteUsersByTime";
 import ProductsSettingsFilter from "../ProductsSettingsFilter/ProductsSettingsFilter";
 import ProductsSettingsList from "../ProductsSettingsList/ProductsSettingsList";
 import UsersSettingsList from "../UsersSettingsList/UsersSettingsList";
-import { UserContext } from "../../Context/UserContext";
-import { Navigate } from "react-router-dom";
+import { ProductsCreator } from "../ProductsCreator/ProductsCreator";
 
 const Settings = () => {
 
-    const {user} = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
-    const [cookies] = useCookies(["boostCookie"])
+    const [cookies, setCookie, removeCookie, updatecookies] = useCookies(["boostCookie"])
     const [category, setCategory] = useState()
     const [articles, setArticles] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [categories, setCategories] = useState([]);
     const [prevPage, setPrevPage] = useState();
     const [nextPage, setNextPage] = useState();
+    const [createButton, setCreateButton] = useState(false);
     const [page, setPage] = useState(1);
     const [hover, setHover] = useState(false);
     const [view, setView] = useState("products");
     const [users, setUsers] = useState();
 
     const getProductsDB = (category) => {
-        setIsLoading(true)
         let link = `${config.BACKEND_ROUTE}/api/products?page=${page}`
-        if(category && view === "products"){
-            link = `${link}&property=category&filter=${category}`
-        } 
+        if (category && view === "products") {
+            link = `${config.BACKEND_ROUTE}/api/products?page=${page}&property=category&filter=${category}`
+        }
+        setIsLoading(true)
         fetch(link)
             .then(resp => resp.json())
             .then(data => {
-                if(data.status === "ERROR") throw new Error(data.type)
+                if (data.status === "ERROR") throw new Error(data.type)
                 setArticles(data.payload)
+                setView("products")
                 setCategories(data.categories)
                 setPrevPage(data.hasPrevPage)
                 setNextPage(data.hasNextPage)
@@ -47,7 +51,6 @@ const Settings = () => {
     }
 
     const getUsersDB = () => {
-        setIsLoading(true)
         const options = {
             method: "GET",
             headers: {
@@ -55,10 +58,12 @@ const Settings = () => {
                 'authorization': cookies.boostCookie
             },
         }
-        fetch(`${config.BACKEND_ROUTE}/api/users?page=${page}`,options)
+        setIsLoading(true)
+        fetch(`${config.BACKEND_ROUTE}/api/users?page=${page}`, options)
             .then(resp => resp.json())
             .then(data => {
                 setUsers(data.payload)
+                setView("users")
                 setPrevPage(data.hasPrevPage)
                 setNextPage(data.hasNextPage)
                 setIsLoading(false)
@@ -91,21 +96,24 @@ const Settings = () => {
     }
 
     const handleProductsView = () => {
-        setCategory("")
-        setView("products")
+        getProductsDB(category)
     }
     const handleUsersView = () => {
         getUsersDB()
-        setView("users")
     }
 
     useEffect(() => {
-        getProductsDB(category)
+        if (view === "products") handleProductsView()
+        else if (view === "users") handleUsersView()
     }, [category, page, view]);
 
-    if(user === null || user.role !== "admin") return (
+    if (user === null || user.role === "user") return (
         <Navigate to={"/profile"} />
     )
+
+    useEffect(() => {
+
+    }, []);
 
 
     return (
@@ -117,19 +125,44 @@ const Settings = () => {
                     <div className="text-decoration-underline" onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave} onClick={handleProductsView} style={{ cursor: hover ? "pointer" : "default" }}>Productos</div>
                     {
                         view === "products" ?
-                            <ProductsSettingsFilter categories={categories} categoryChange={categoryChange} /> :
+                            (<>
+                                <ProductsSettingsFilter categories={categories} categoryChange={categoryChange} />
+                                {createButton ?
+                                    (<button className="btn btn-dark" onClick={() => { setCreateButton(!createButton) }}>Ver productos</button>) :
+                                    (<button className="btn btn-dark" onClick={() => { setCreateButton(!createButton) }}>Crear producto</button>)
+                                }
+                            </>) :
                             <></>
                     }
-                    <div className="text-decoration-underline" onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave} onClick={handleUsersView} style={{ cursor: hover ? "pointer" : "default" }}>Usuarios</div>
+                    {
+                        user.role === "admin" ?
+                            <>
+                                <div className="text-decoration-underline" onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave} onClick={handleUsersView} style={{ cursor: hover ? "pointer" : "default" }}>Usuarios</div>
+                                {
+                                    (view === "users") ?
+                                        <DeleteUsersByTime getUsersDB={getUsersDB} /> :
+                                        <></>
+                                }
+                            </> :
+                            <></>
+
+                    }
+                    <div className="text-decoration-underline" onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave} onClick={() => location.assign("/profile")} style={{ cursor: hover ? "pointer" : "default" }}>
+                        Perfil
+                    </div>
+
                 </div>
                 {
-                    view === "products" ?
-                        <ProductsSettingsList articles={articles} changePageAdd={changePageAdd} changePageSub={changePageSub} isLoading={isLoading} page={page} /> : <></>
+                    (view === "products") ?
+                        (createButton ?
+                            (<ProductsCreator />) :
+                            (<ProductsSettingsList articles={articles} changePageAdd={changePageAdd} changePageSub={changePageSub} isLoading={isLoading} page={page} />)) :
+                        <></>
                 }
 
                 {
                     view === "users" ?
-                        <UsersSettingsList users={users} changePageAdd={changePageAdd} changePageSub={changePageSub} isLoading={isLoading} page={page} /> : <></>
+                        <UsersSettingsList usersList={users} changePageAdd={changePageAdd} changePageSub={changePageSub} isLoading={isLoading} page={page} /> : <></>
                 }
 
             </div>
