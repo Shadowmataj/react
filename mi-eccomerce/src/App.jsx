@@ -15,8 +15,8 @@ import { Opiniones } from './components/Opiniones/Opiniones'
 import { ProductsContainer } from './components/ProductsContainer/ProductsContainer'
 import { ProfileContainer } from './components/ProfileContainer/ProfileContainer'
 import { RegisterContainer } from './components/RegisterContainer/RegisterContainer'
-import { CartContextProvider } from './Context/CartContext'
-import { UserContextProvider } from './context/UserContext'
+import { CartContextProvider } from './Context/CartContext.jsx'
+import { UserContextProvider } from './Context/UserContext.jsx'
 import Settings from './components/Settings/Settings'
 
 function App() {

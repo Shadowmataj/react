@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
 import config from "../../config/config";
-import "./CSS/usersSettings.css";
+import "./CSS/UsersSettings.css";
 import { UsersEditor } from "../UsersEditor/UsersEditor";
 
 export const UsersSettings = ({ user }) => {
